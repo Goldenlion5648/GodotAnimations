@@ -10,7 +10,7 @@ var to_point: Vector3
 func setup(from_: Vector3, to_: Vector3) -> void:
 	from_point = from_
 	to_point = to_
-	print("ran init")
+#	print("ran init")
 	$PointConnectorPath.curve.clear_points()
 	$PointConnectorPath.curve.add_point(from_point)
 	$PointConnectorPath.curve.add_point(to_point)
