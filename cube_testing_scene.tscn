@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtn7lhx37a7fs"]
+
+[ext_resource type="PackedScene" uid="uid://dc1qt4uke34gk" path="res://single_cube.tscn" id="1_losa6"]
+
+[node name="cube_testing_scene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.82194)
+
+[node name="CSGBox3D" parent="." instance=ExtResource("1_losa6")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.95486, 0.0173626, -0.296547, -0.0215807, 0.999707, -0.0109563, 0.29627, 0.0168614, 0.954955, -1.52818, 0.726075, 3.71041)

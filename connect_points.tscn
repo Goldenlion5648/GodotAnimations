@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://numinfagqnh0"]
+
+[ext_resource type="Script" path="res://other_example.gd" id="1_oi5uk"]
+
+[sub_resource type="Curve3D" id="Curve3D_bybf8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.70705, 2.15112, 1.95845, 0.345, 0, 0, -0.691516, -0.149244, -0.315905, 0.142205, 1.38053, 2.96954, -3.68053, -1.92155, -0.755391, 3.68053, 1.92155, 0.755391, 3.18604, 0.940475, 1.67123),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_oi5uk")
+line_radius = 0.2
+line_resoultion = 5
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(0.2, 0, 0.0618034, 0.190211, -0.161803, 0.117557, -0.161803, -0.117557, 0.0618034, -0.190211)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 0.09
+path_joined = false
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_bybf8")

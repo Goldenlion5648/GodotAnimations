@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvhe8pcrskqk2"]
+
+[ext_resource type="Script" path="res://graphing.gd" id="1_4ifp0"]
+
+[node name="main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.63879)
+
+[node name="node_holder" type="Node3D" parent="."]
+script = ExtResource("1_4ifp0")
+grid_dim = 3
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49955, 5.9634)

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5mobeq1ojnth"]
+
+[ext_resource type="Script" path="res://my_path_connections.gd" id="1_nh7w7"]
+[ext_resource type="Shader" uid="uid://bgjri5cg5ag48" path="res://single_cube.tres" id="2_2uu50"]
+
+[sub_resource type="Curve3D" id="Curve3D_j58en"]
+resource_local_to_scene = true
+bake_interval = 41.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 3, 3),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brhib"]
+render_priority = 0
+shader = ExtResource("2_2uu50")
+
+[node name="my_path" type="Node3D"]
+script = ExtResource("1_nh7w7")
+line_3d_resolution = 8
+line_3d_scale = 0.4
+
+[node name="PointConnectorPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_j58en")
+
+[node name="connecting_cube_csg" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(0.4, 0, 0.282843, 0.282843, 2.44921e-17, 0.4, -0.282843, 0.282843, -0.4, 4.89843e-17, -0.282843, -0.282843, -7.34764e-17, -0.4, 0.282843, -0.282843)
+mode = 2
+path_node = NodePath("../PointConnectorPath")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("ShaderMaterial_brhib")
