@@ -1,8 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4i8lb4qdec3b"]
+[gd_scene load_steps=6 format=3 uid="uid://c4i8lb4qdec3b"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nr3oj"]
-albedo_color = Color(0.698039, 0, 0, 1)
+[ext_resource type="Shader" path="res://shaders/sphere_point.gdshader" id="1_girpy"]
+
+[sub_resource type="Gradient" id="Gradient_x081a"]
+offsets = PackedFloat32Array(0, 0.434783, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.177258, 0.177258, 0.177258, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ufpaa"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r3t4d"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+color_ramp = SubResource("Gradient_x081a")
+noise = SubResource("FastNoiseLite_ufpaa")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4r4i2"]
+render_priority = 0
+shader = ExtResource("1_girpy")
+shader_parameter/noise = SubResource("NoiseTexture2D_r3t4d")
 
 [node name="sphere_point" type="CSGSphere3D"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-material = SubResource("StandardMaterial3D_nr3oj")
+material = SubResource("ShaderMaterial_4r4i2")

@@ -15,6 +15,10 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Globals.gd"
+
 [input]
 
 reset={
@@ -25,4 +29,4 @@ reset={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.0156863, 0.0156863, 0.0156863, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
