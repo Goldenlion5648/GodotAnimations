@@ -21,11 +21,3 @@ func setup(from_: Vector3, to_: Vector3) -> void:
 		result_polygon.append(Vector2(x_part, y_part))
 	$connecting_cube_csg.polygon = PackedVector2Array(result_polygon)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-#	setup(Vector3(1, 1, 1), Vector3(2, 3, 3))
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

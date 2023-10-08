@@ -16,10 +16,12 @@ func _ready() -> void:
 		var noise = FastNoiseLite.new()
 		noise.noise_type = FastNoiseLite.NoiseType.TYPE_PERLIN
 #		noise.seed = i
-		noise.fractal_octaves = 5
+		noise.fractal_octaves = 9
+		noise.frequency = 0.03
 		noise.frequency = 0.013
 		noises.append(noise)
 	var children_made = []
+#	var value_offset_mult = 100
 	var value_offset_mult = 60
 	var centering_offset = Vector3(grid_dim * 1.0 / 2, grid_dim * 1.0 / 2, grid_dim * 1.0 / 2)
 	for x in range(grid_dim):
@@ -27,15 +29,19 @@ func _ready() -> void:
 			for z in range(grid_dim):
 				var z_pos = z
 				var current_point = sphere_point.instantiate() as CSGSphere3D
+				
 				current_point.visible = false
 #				print(noises[0].get_noise_1d(x))
 #				print(noises[1].get_noise_1d(y))
 #				print(noises[2].get_noise_1d(z))
 				current_point.position = (Vector3(
-#							x, y, z
-							randf_range(-.2, .2) + noises[0].get_noise_3d(x, x, y) * value_offset_mult, 
-							randf_range(-.2, .2) + noises[1].get_noise_3d(z, y, y) * value_offset_mult, 
-							randf_range(-.2, .2) + noises[2].get_noise_3d(z, z, z) * value_offset_mult
+#							noises[0].get_noise_2d(x, y) * value_offset_mult, 
+#							noises[1].get_noise_2d(z, y) * value_offset_mult, 
+#							noises[2].get_noise_2d(x, z)  * value_offset_mult
+							x, y, z
+#							randf_range(-.5, .5) + noises[0].get_noise_3d(x, x, y) * value_offset_mult, 
+#							randf_range(-.5, .5) + noises[1].get_noise_3d(z, y, y) * value_offset_mult, 
+#							randf_range(-.5, .5) + noises[2].get_noise_3d(z, z, z) * value_offset_mult
 						) - centering_offset)
 				add_child(current_point)
 				children_made.append(current_point)	
@@ -51,7 +57,7 @@ func connect_nodes():
 	Globals.seed += 1
 	current_seed = 21
 	prints("current_seed", current_seed)
-	seed(current_seed)
+#	seed(current_seed)
 	all_children.shuffle()
 	var seen = {}
 	var current_node = all_children.pop_back()
@@ -62,8 +68,12 @@ func connect_nodes():
 	for i in range(all_children.size()/lines_coming_off):
 		await get_tree().create_timer(.5).timeout
 #		print(all_children)
-		all_children.sort_custom(func(node_a: Node3D, node_b: Node3D): 
-					return node_a.position.distance_to(prev.position) < node_b.position.distance_to(prev.position) 
+		all_children.sort_custom(
+			func(node_a: Node3D, node_b: Node3D): 
+				return (
+					node_a.position.distance_to(prev.position) < 
+					node_b.position.distance_to(prev.position)
+				) 
 		)
 		var chosen: Node3D
 		for j in range(lines_coming_off):

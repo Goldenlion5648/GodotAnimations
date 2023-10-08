@@ -1,6 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://numinfagqnh0"]
+[gd_scene load_steps=3 format=3 uid="uid://mulfnhq7ll2b"]
 
-[ext_resource type="Script" path="res://other_example.gd" id="1_oi5uk"]
+[sub_resource type="GDScript" id="GDScript_ywaq1"]
+script/source = "@tool
+extends Node3D
+
+@export var line_radius = 0.3
+@export var line_resoultion = 180
+
+func _process(delta):
+	var circle = PackedVector2Array()
+	for degree in line_resoultion:
+		var x = line_radius * cos(PI * 2 * degree / line_resoultion)
+		var y = line_radius * sin(PI * 2 * degree / line_resoultion)
+		var coords = Vector2(x,y)
+		circle.append(coords)
+	$CSGPolygon3D.polygon = circle
+"
 
 [sub_resource type="Curve3D" id="Curve3D_bybf8"]
 _data = {
@@ -10,7 +25,7 @@ _data = {
 point_count = 3
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_oi5uk")
+script = SubResource("GDScript_ywaq1")
 line_radius = 0.2
 line_resoultion = 5
 
